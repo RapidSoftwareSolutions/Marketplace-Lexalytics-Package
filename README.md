@@ -52,7 +52,7 @@ A batch is an array of documents, each which consists of three values: an option
 | configId    | String     | Identifier of the specific configuration that should be used for processing. 
 
 ## Lexalytics.createDocumentsByJobId
-A jobId is not required but can be helpful to separate out content processed via particular environments (dev vs QA) or particular job streams (historical content vs live news).Job_id is only supported by the polling method (not callback or auto response) and if you submit via job_id, you must also retrieve by job_id. You can use only 100 unique job_ids per 24 hour period.If you specified a job_id when submitting you must also specify a job_id when retrieving.
+A jobId is not required but can be helpful to separate out content processed via particular environments (dev vs QA) or particular job streams (historical content vs live news).Job_id is only supported by the polling method (not callback or auto response) and if you submit via jobId, you must also retrieve by jobId. You can use only 100 unique jobIds per 24 hour period.If you specified a jobId when submitting you must also specify a jobId when retrieving.
 
 | Field       | Type       | Description
 |-------------|------------|----------
@@ -95,7 +95,7 @@ Deleting a queued document if Semantria has not processed it yet.
 | documentId| String     | the id of the deleted document.
 
 ## Lexalytics.retrieveDocumentsByJobId
-If you submitted via jobId, you must also retrieve by that job_id. You cannot use a config_id when retrieving by job_id, although you can use a config_id when submitting with a job_id.This call retrieves as many processed documents as fit into your maximum batch size.By default, the server responds to retrieval requests with 100 documents per batch. To increase this limit, please contact us.Once a document has been retrieved, it will be removed from the Semantria systems.
+If you submitted via jobId, you must also retrieve by that jobId. You cannot use a config_id when retrieving by jobId, although you can use a config_id when submitting with a jobId.This call retrieves as many processed documents as fit into your maximum batch size.By default, the server responds to retrieval requests with 100 documents per batch. To increase this limit, please contact us.Once a document has been retrieved, it will be removed from the Semantria systems.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -128,7 +128,7 @@ This method submits an list of documents to be analyzed in relation to each othe
 | configId | String     | ID of config to use.
 
 ## Lexalytics.createCollectionOfDocumentsByJobId
-This method submits an list of documents to be analyzed in relation to each other and returns one output. Discovery analysis will contain a summary of sentiment, named entity extraction, themes, and categorization for all the documents in the collection.A collection consists of an array of elements: (optional) ID, (optional) tag and an array of pieces of text.You can use a job_id to separate specific environment (such as dev vs QA). Collections submitted with a job_id must be retrieved via that same job_id.
+This method submits an list of documents to be analyzed in relation to each other and returns one output. Discovery analysis will contain a summary of sentiment, named entity extraction, themes, and categorization for all the documents in the collection.A collection consists of an array of elements: (optional) ID, (optional) tag and an array of pieces of text.You can use a jobId to separate specific environment (such as dev vs QA). Collections submitted with a jobId must be retrieved via that same jobId.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -200,8 +200,8 @@ When creating a configuration, only a few fields are mandatory to set. These are
 | entitiesThreshold      | Number     | Defines low threshold for evidence score of named and user entities to be reported in the output. Default: 55.
 | oneSentenceMode        | Select     | Defines whether or not service should use one sentence mode with less accurate grammar. Default: false.
 | processHtml            | Select     | Defines whether or not the service should clean up HTML tags before processing. Default: false.
-| language               | Sting      | Defines target language that will be used for task processing. Default: English.
-| callback               | Sting      | Defines a callback URL for automatic data responding.
+| language               | String      | Defines target language that will be used for task processing. Default: English.
+| callback               | String      | Defines a callback URL for automatic data responding.
 | modelSentiment         | Select     | ConfigurationDocumentSection.Switches on/off model-based sentiment feature. Default: false.
 | intentions             | Select     | ConfigurationDocumentSection.Switches on intentions detection feature. Default: false.
 | conceptTopics          | Select     | ConfigurationDocumentSection.Defines whether user categories will be reported for the document. Default: false.
@@ -242,8 +242,8 @@ When creating a configuration, only a few fields are mandatory to set. These are
 | entitiesThreshold      | Number     | Defines low threshold for evidence score of named and user entities to be reported in the output. Default: 55.
 | oneSentenceMode        | Select     | Defines whether or not service should use one sentence mode with less accurate grammar. Default: false.
 | processHtml            | Select     | Defines whether or not the service should clean up HTML tags before processing. Default: false.
-| language               | Sting      | Defines target language that will be used for task processing. Default: English.
-| callback               | Sting      | Defines a callback URL for automatic data responding.
+| language               | String      | Defines target language that will be used for task processing. Default: English.
+| callback               | String      | Defines a callback URL for automatic data responding.
 | modelSentiment         | Select     | ConfigurationDocumentSection.Switches on/off model-based sentiment feature. Default: false.
 | intentions             | Select     | ConfigurationDocumentSection.Switches on intentions detection feature. Default: false.
 | conceptTopics          | Select     | ConfigurationDocumentSection.Defines whether user categories will be reported for the document. Default: false.

@@ -1216,13 +1216,13 @@
                 },
                 {
                     "name": "language",
-                    "type": "Sting",
+                    "type": "String",
                     "info": "Defines target language that will be used for task processing. Default: English.",
                     "required": false
                 },
                 {
                     "name": "callback",
-                    "type": "Sting",
+                    "type": "String",
                     "info": "Defines a callback URL for automatic data responding.",
                     "required": false
                 },
@@ -1691,13 +1691,13 @@
                 },
                 {
                     "name": "language",
-                    "type": "Sting",
+                    "type": "String",
                     "info": "Defines target language that will be used for task processing. Default: English.",
                     "required": false
                 },
                 {
                     "name": "callback",
-                    "type": "Sting",
+                    "type": "String",
                     "info": "Defines a callback URL for automatic data responding.",
                     "required": false
                 },
