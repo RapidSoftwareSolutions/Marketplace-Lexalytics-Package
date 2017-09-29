@@ -944,6 +944,15 @@
                     "vendorSchema": {
                         "name": "job_id"
                     }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "Return processed documents from a particular config id. If the config_id is not provided, the API uses the primary configuration id by default.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
                 }
             ],
             "vendorRequest": {
@@ -998,6 +1007,15 @@
                     "required": true,
                     "vendorSchema": {
                         "name": "collection_id"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "Return processed documents from a particular config id. If the config_id is not provided, the API uses the primary configuration id by default.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
                     }
                 }
             ],
@@ -1130,7 +1148,7 @@
                     "name": "name",
                     "type": "String",
                     "info": "Configuration name.",
-                    "required": false,
+                    "required": true,
                     "vendorSchema": {
                         "name": "name"
                     }
@@ -2387,13 +2405,13 @@
                             "name": "name",
                             "type": "String",
                             "info": "Query name.",
-                            "required": true
+                            "required": false
                         },
                         {
                             "name": "query",
                             "type": "String",
                             "info": "Boolean query used for content categorization.",
-                            "required": true
+                            "required": false
                         }
                     ]
                 }
@@ -2688,19 +2706,19 @@
                             "name": "name",
                             "type": "String",
                             "info": "Category name.",
-                            "required": true
+                            "required": false
                         },
                         {
                             "name": "weight",
                             "type": "String",
                             "info": "The \u201cweigh\u201d parameter is a tool that allows users to manually fine tune the impact of certain categories that don\u2019t properly reflect reality.",
-                            "required": true
+                            "required": false
                         },
                         {
                             "name": "samples",
                             "type": "JSON",
                             "info": "Example [\"food\",\"restaurant\"]",
-                            "required": true
+                            "required": false
                         }
                     ]
                 }
@@ -3620,25 +3638,25 @@
                             "name": "name",
                             "type": "String",
                             "info": "The entity name.",
-                            "required": true
+                            "required": false
                         },
                         {
                             "name": "type",
                             "type": "String",
                             "info": "The entity type.",
-                            "required": true
+                            "required": false
                         },
                         {
                             "name": "label",
                             "type": "String",
                             "info": "The entity label.",
-                            "required": true
+                            "required": false
                         },
                         {
                             "name": "normalized",
                             "type": "String",
                             "info": "The entity normalized.",
-                            "required": true
+                            "required": false
                         }
                     ]
                 }

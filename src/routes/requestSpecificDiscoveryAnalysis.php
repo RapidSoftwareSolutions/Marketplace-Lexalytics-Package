@@ -13,9 +13,8 @@ $app->post('/api/Lexalytics/requestSpecificDiscoveryAnalysis', function ($reques
     }
 
     $requiredParams = ['apiKey'=>'api_key','apiSecret'=>'api_secret','collectionId'=>'collection_id'];
-    $optionalParams = [];
-    $bodyParams = [
-    ];
+    $optionalParams = ['configId' => 'config_id'];
+    $bodyParams = ['config_id'];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 

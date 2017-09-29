@@ -13,9 +13,9 @@ $app->post('/api/Lexalytics/retrieveProcessedDiscoveryByJobId', function ($reque
     }
 
     $requiredParams = ['apiKey'=>'api_key','apiSecret'=>'api_secret','jobId'=>'job_id'];
-    $optionalParams = [];
+    $optionalParams = ['configId' => 'config_id'];
     $bodyParams = [
-       'query' => ['job_id']
+       'query' => ['job_id','config_id']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

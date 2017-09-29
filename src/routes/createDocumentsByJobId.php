@@ -53,14 +53,13 @@ $app->post('/api/Lexalytics/createDocumentsByJobId', function ($request, $respon
     if(!empty($requestParams['json']['documentBody']))
     {
 
-        if(!empty($requestParams['json']['documentBody'][$key]['jobId']))
-        {
+
             foreach($requestParams['json']['documentBody'] as $key => $value)
             {
                 $requestParams['json']['documentBody'][$key]['job_id'] = $requestParams['json']['documentBody'][$key]['jobId'];
                 unset($requestParams['json']['documentBody'][$key]['jobId']);
             }
-        }
+
 
         $jsonArr = $requestParams['json']['documentBody'];
         unset($requestParams['json']['documentBody']);

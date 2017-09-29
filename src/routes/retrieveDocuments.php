@@ -4,7 +4,7 @@ $app->post('/api/Lexalytics/retrieveDocuments', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiKey','apiSecret','configId']);
+    $validateRes = $checkRequest->validate($request, ['apiKey','apiSecret']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,8 +12,8 @@ $app->post('/api/Lexalytics/retrieveDocuments', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'api_key','configId'=>'config_id','apiSecret'=>'api_secret'];
-    $optionalParams = ['jobId'=>'job_id'];
+    $requiredParams = ['apiKey'=>'api_key','apiSecret'=>'api_secret'];
+    $optionalParams = ['configId'=>'config_id','jobId'=>'job_id'];
     $bodyParams = [
        'query' => ['config_id','job_id']
     ];
@@ -51,14 +51,11 @@ $app->post('/api/Lexalytics/retrieveDocuments', function ($request, $response) {
     if(!empty($requestParams['json']['documentBody']))
     {
 
-        if(!empty($requestParams['json']['documentBody'][$key]['jobId']))
-        {
             foreach($requestParams['json']['documentBody'] as $key => $value)
             {
                 $requestParams['json']['documentBody'][$key]['job_id'] = $requestParams['json']['documentBody'][$key]['jobId'];
                 unset($requestParams['json']['documentBody'][$key]['jobId']);
             }
-        }
 
         $jsonArr = $requestParams['json']['documentBody'];
         unset($requestParams['json']['documentBody']);
