@@ -1,0 +1,4033 @@
+{
+    "package": "Lexalytics",
+    "tagline": "Lexalytics API",
+    "description": "We process billions of unstructured documents every day, globally.We are the industry leader in translating text into profitable decisions; we make state-of-the-art cloud and on-prem text and sentiment analysis technologies that transform customers\u2019 thoughts and conversations into actionable insights.",
+    "image": "https:\/\/logo.clearbit.com\/www.lexalytics.com",
+    "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-Lexalytics-Package",
+    "keywords": [
+        "API",
+        "Translating",
+        "Analytics",
+        "Categorization",
+        "Monitoring"
+    ],
+    "accounts": {
+        "domain": "www.lexalytics.com",
+        "credentials": [
+            "apiKey",
+            "apiSecret"
+        ]
+    },
+    "steps": [
+        "Register on the www.lexalytics.com",
+        "After registration, you will receive apiKey and apiSecret in account Dashboard https:\/\/www.lexalytics.com\/users\/me\/api\/keys"
+    ],
+    "blocks": [
+        {
+            "name": "getApiStatus",
+            "description": "This method retrieves API status information such as the app version, current API version, supported languages and encodings, the overall service status, etc.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/status.json",
+                "method": "get",
+                "requestParameters": []
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createDocument",
+            "description": "This method queues document onto the server for analysis. Queued document analyzes individually and will have its own set of results. ",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "Identifier of the specific configuration that should be used for processing. ",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "id",
+                    "type": "String",
+                    "info": "Up to 32 symbols unique identifier of document assigned and tracked by client.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "id"
+                    }
+                },
+                {
+                    "name": "text",
+                    "type": "String",
+                    "info": "Document text that needs to be analyzed by the service.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "text"
+                    }
+                },
+                {
+                    "name": "tag",
+                    "type": "String",
+                    "info": "Any text of up to 50 characters used like marker.\u201d",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "tag"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/document.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "id",
+                            "text",
+                            "tag"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createMultipleDocuments",
+            "description": "A batch is an array of documents, each which consists of three values: an optional unique ID, an option tag, and the text you wish to analyze.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "documentBody",
+                    "type": "Array",
+                    "info": "A batch is a list of documents that are pushed to the server in one request. ",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "Up to 32 symbols unique identifier of document assigned and tracked by client.",
+                            "required": true,
+                            "vendorSchema": {
+                                "name": "id"
+                            }
+                        },
+                        {
+                            "name": "text",
+                            "type": "String",
+                            "info": "Document text that needs to be analyzed by the service.",
+                            "required": true,
+                            "vendorSchema": {
+                                "name": "text"
+                            }
+                        },
+                        {
+                            "name": "tag",
+                            "type": "String",
+                            "info": "Any text of up to 50 characters used like marker.\u201d",
+                            "required": true,
+                            "vendorSchema": {
+                                "name": "tag"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "Identifier of the specific configuration that should be used for processing. ",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/document\/batch.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "documentBody"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createDocumentsByJobId",
+            "description": "A jobId is not required but can be helpful to separate out content processed via particular environments (dev vs QA) or particular job streams (historical content vs live news).Job_id is only supported by the polling method (not callback or auto response) and if you submit via job_id, you must also retrieve by job_id. You can use only 100 unique job_ids per 24 hour period.If you specified a job_id when submitting you must also specify a job_id when retrieving.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "documentBody",
+                    "type": "Array",
+                    "info": "A batch is a list of documents that are pushed to the server in one request. ",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "Up to 32 symbols unique identifier of document assigned and tracked by client.",
+                            "required": true,
+                            "vendorSchema": {
+                                "name": "id"
+                            }
+                        },
+                        {
+                            "name": "text",
+                            "type": "String",
+                            "info": "Document text that needs to be analyzed by the service.",
+                            "required": true,
+                            "vendorSchema": {
+                                "name": "text"
+                            }
+                        },
+                        {
+                            "name": "tag",
+                            "type": "String",
+                            "info": "Any text of up to 50 characters used like marker.\u201d",
+                            "required": true,
+                            "vendorSchema": {
+                                "name": "tag"
+                            }
+                        },
+                        {
+                            "name": "jobId",
+                            "type": "String",
+                            "info": "If you specified a jobId when submitting you must also specify a jobId when retrieving.",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "Identifier of the specific configuration that should be used for processing. ",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/document\/batch.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "documentArray"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "requestSpecificDocuments",
+            "description": "Requesting: Asking the status (or processed results) of a specific document.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "Optional if the document was processed with the default configuration. Required for non-default configurations.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "documentId",
+                    "type": "String",
+                    "info": "the id of the desired document.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "document_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/document\/{$data['document_id']}.json",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "retrieveDocuments",
+            "description": "This call retrieves as many processed documents as fit into your maximum batch size.By default, the server responds to retrieval requests with 100 documents per batch. To increase this limit, please contact us.Once a document has been retrieved, it will be removed from the Semantria systems.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "Optional if the document was processed with the default configuration. Required for non-default configurations.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "jobId",
+                    "type": "String",
+                    "info": "The job id.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "job_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/document\/processed.json",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id",
+                            "job_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "cancelDocumentLoad",
+            "description": "Deleting a queued document if Semantria has not processed it yet.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "documentId",
+                    "type": "String",
+                    "info": "the id of the deleted document.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "document_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/document\/{$data['document_id']}.json",
+                "method": "delete",
+                "requestParameters": []
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "retrieveDocumentsByJobId",
+            "description": "If you submitted via jobId, you must also retrieve by that job_id. You cannot use a config_id when retrieving by job_id, although you can use a config_id when submitting with a job_id.This call retrieves as many processed documents as fit into your maximum batch size.By default, the server responds to retrieval requests with 100 documents per batch. To increase this limit, please contact us.Once a document has been retrieved, it will be removed from the Semantria systems.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "jobId",
+                    "type": "String",
+                    "info": "The job id.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "job_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/document\/processed.json",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "job_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createDocumentMetadata",
+            "description": "In addition to the required fields, you can also submit metadata about your content. Metadata submissions are allowed only when using the JSON format of the endpoint. No processing of the metadata elements is done by Semantria and the metadata fields will be returned to you with the document when you retrieve it.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "id",
+                    "type": "String",
+                    "info": "Up to 32 symbols unique identifier of document assigned and tracked by client.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "id"
+                    }
+                },
+                {
+                    "name": "tag",
+                    "type": "String",
+                    "info": "Any text of up to 50 characters used like marker",
+                    "required": true
+                },
+                {
+                    "name": "text",
+                    "type": "String",
+                    "info": "Document text that needs to be analyzed by the service.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "text"
+                    }
+                },
+                {
+                    "name": "metadata",
+                    "type": "JSON",
+                    "info": "The metadata field is schema less and can contain any valid JSON you wish to send. You can attach metadata to individual documents and to collections as well.Example - {\"testKey\":\"testValue\"}",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/document.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "metadata",
+                            "text",
+                            "id",
+                            "tag"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createCollectionOfDocuments",
+            "description": "This method submits an array of documents to be analyzed in relation to each other and returns one output. Discovery analysis will contain a summary of sentiment, named entity extraction, themes, and categorization for all the documents in the collection.A collection consists of an array of elements: (optional) ID, (optional) tag and an array of pieces of text.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "id",
+                    "type": "String",
+                    "info": "Up to 32 symbols unique identifier of document assigned and tracked by client.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "id"
+                    }
+                },
+                {
+                    "name": "tag",
+                    "type": "String",
+                    "info": "Any text of up to 50 characters used like marker.",
+                    "required": true
+                },
+                {
+                    "name": "documents",
+                    "type": "List",
+                    "structure": {
+                        "name": "documentText",
+                        "type": "String",
+                        "info": "Text for document."
+                    },
+                    "info": "List of documents text that need to be analyzed by the service.",
+                    "required": true
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of config to use.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/collection.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "documents",
+                            "tag",
+                            "id"
+                        ]
+                    },
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createCollectionOfDocumentsByJobId",
+            "description": "This method submits an array of documents to be analyzed in relation to each other and returns one output. Discovery analysis will contain a summary of sentiment, named entity extraction, themes, and categorization for all the documents in the collection.A collection consists of an array of elements: (optional) ID, (optional) tag and an array of pieces of text.You can use a job_id to separate specific environment (such as dev vs QA). Collections submitted with a job_id must be retrieved via that same job_id.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "id",
+                    "type": "String",
+                    "info": "Up to 32 symbols unique identifier of document assigned and tracked by client.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "id"
+                    }
+                },
+                {
+                    "name": "tag",
+                    "type": "String",
+                    "info": "Any text of up to 50 characters used like marker.",
+                    "required": true
+                },
+                {
+                    "name": "documents",
+                    "type": "List",
+                    "structure": {
+                        "name": "documentText",
+                        "type": "String",
+                        "info": "Text for document."
+                    },
+                    "info": "List of the simple strings to be processed as collection.",
+                    "required": true
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of config to use.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "jobId",
+                    "type": "String",
+                    "info": "Specific marker of a job collection belongs to, can be used for collections ordering on client side.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "job_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/collection.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "documents",
+                            "tag",
+                            "id",
+                            "job_id"
+                        ]
+                    },
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "retrieveProcessedDiscoveryAnalyses",
+            "description": "This method retrieves analysis results for processed collections from Semantria. FAILED collections will have FAILED status in response. Semantria responds with limited amount of results per API call. If configuration ID provided, Semantria responds with the collections, which were queued using the same configuration ID, in opposite Primary configuration uses.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "Return processed documents from a particular config id. If the config_id is not provided, the API uses the primary configuration id by default.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "documentId",
+                    "type": "String",
+                    "info": "Return only the document with this ID.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "document_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/collection\/processed.json",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id",
+                            "document_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "retrieveProcessedDiscoveryByJobId",
+            "description": "If you submitted by jobId you must also retrieve by jobId.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "jobId",
+                    "type": "String",
+                    "info": "Return processed documents from a particular job id.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "job_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/collection\/processed.json",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "job_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "requestSpecificDiscoveryAnalysis",
+            "description": "Requesting: Asking the status (or processed results) of a specific collection.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "collectionId",
+                    "type": "String",
+                    "info": "The collection id.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "collection_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/collection\/{$data['collection_id']}.json",
+                "method": "get",
+                "requestParameters": []
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "cancelDiscoveryAnalyses",
+            "description": "Deleting a queued document if Semantria has not processed it yet.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "collectionId",
+                    "type": "String",
+                    "info": "The collection id.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "collection_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/collection\/{$data['collection_id']}.json",
+                "method": "delete",
+                "requestParameters": []
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getExistingConfigurations",
+            "description": "The results listing here shows every settable option in a configuration. You do not have to submit all of these values to modify specific values of a configuration.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/configurations.json",
+                "method": "get",
+                "requestParameters": []
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createConfigurations",
+            "description": "When creating a configuration, only a few fields are mandatory to set. These are:--name--is_primary--language.The complete list of settable values, their types and defaults, see more in readme.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Configuration name.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "name"
+                    }
+                },
+                {
+                    "name": "isPrimary",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Identifies whether the current configuration is primary or not. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "is_primary"
+                    }
+                },
+                {
+                    "name": "autoResponse",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Defines whether or not the service should respond with processed results automatically. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "auto_response"
+                    }
+                },
+                {
+                    "name": "alphanumericThreshold",
+                    "type": "Number",
+                    "info": "Defines the threshold of alphanumeric characters needed in the text in percent. Default: 80.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "alphanumeric_threshold"
+                    }
+                },
+                {
+                    "name": "conceptTopicsThreshold",
+                    "type": "String",
+                    "info": "Defines concept topics detection threshold. Default: 0.45.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "concept_topics_threshold"
+                    }
+                },
+                {
+                    "name": "entitiesThreshold",
+                    "type": "Number",
+                    "info": "Defines low threshold for evidence score of named and user entities to be reported in the output. Default: 55.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "entities_threshold"
+                    }
+                },
+                {
+                    "name": "oneSentenceMode",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Defines whether or not service should use one sentence mode with less accurate grammar. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "one_sentence_mode"
+                    }
+                },
+                {
+                    "name": "processHtml",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Defines whether or not the service should clean up HTML tags before processing. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "process_html"
+                    }
+                },
+                {
+                    "name": "language",
+                    "type": "Sting",
+                    "info": "Defines target language that will be used for task processing. Default: English.",
+                    "required": false
+                },
+                {
+                    "name": "callback",
+                    "type": "Sting",
+                    "info": "Defines a callback URL for automatic data responding.",
+                    "required": false
+                },
+                {
+                    "name": "modelSentiment",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Switches on\/off model-based sentiment feature. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "model_sentiment"
+                    }
+                },
+                {
+                    "name": "intentions",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Switches on intentions detection feature. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "intentions"
+                    }
+                },
+                {
+                    "name": "conceptTopics",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether user categories will be reported for the document. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "concept_topics"
+                    }
+                },
+                {
+                    "name": "queryTopics",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether queries will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "query_topics"
+                    }
+                },
+                {
+                    "name": "autoCategories",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether auto-categories will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "auto_categories"
+                    }
+                },
+                {
+                    "name": "namedEntities",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether named entities will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "named_entities"
+                    }
+                },
+                {
+                    "name": "userEntities",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether user entities will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "user_entities"
+                    }
+                },
+                {
+                    "name": "themes",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether document and user\/named entity themes will be reported for the document. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "themes"
+                    }
+                },
+                {
+                    "name": "mentions",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether mentions for themes and user\/named entities will be reported for the document. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "mentions"
+                    }
+                },
+                {
+                    "name": "relations",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether user\/named entity relations will be reported for the document. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "relations"
+                    }
+                },
+                {
+                    "name": "opinions",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether user\/named entity opinions will be reported for the document. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "opinions"
+                    }
+                },
+                {
+                    "name": "sentimentPhrases",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether sentiment-bearing phrases will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "sentiment_phrases"
+                    }
+                },
+                {
+                    "name": "posTypes",
+                    "type": "String",
+                    "info": "ConfigurationDocumentSection.Defines parts-of-speech which will be responded by the server.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "pos_types"
+                    }
+                },
+                {
+                    "name": "summarySize",
+                    "type": "Number",
+                    "info": "ConfigurationDocumentSection.Limits the number of sentences for the document summary feature. Default: 3.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "summary_size"
+                    }
+                },
+                {
+                    "name": "detect_language",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Switches on language detection feature. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "detect_language"
+                    }
+                },
+                {
+                    "name": "collectionFacets",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationCollectionSection.Defines whether facets will be reported for the collection. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_facets"
+                    }
+                },
+                {
+                    "name": "collectionAttributes",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationCollectionSection.Defines whether facets will be reported for the collection. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_attributes"
+                    }
+                },
+                {
+                    "name": "collectionMentions",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationCollectionSection.Defines whether mentions for themes, user\/named entities, facets and attributes will be reported for the collection. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_mentions"
+                    }
+                },
+                {
+                    "name": "collectionConceptTopics",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationCollectionSection.Defines whether user_categories will be reported for the collection. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_concept_topics"
+                    }
+                },
+                {
+                    "name": "collectionQueryTopics",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether queries will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_query_topics"
+                    }
+                },
+                {
+                    "name": "collectionNamedEntities",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether named entities will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_named_entities"
+                    }
+                },
+                {
+                    "name": "collectionUserEntities",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether user entities will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_user_entities"
+                    }
+                },
+                {
+                    "name": "collectionThemes",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether document and user\/named entity themes will be reported for the document. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_themes"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/configurations.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "name",
+                            "is_primary",
+                            "auto_response",
+                            "alphanumeric_threshold",
+                            "concept_topics_threshold",
+                            "entities_threshold",
+                            "one_sentence_mode",
+                            "process_html",
+                            "language",
+                            "callback",
+                            "model_sentiment",
+                            "intentions",
+                            "concept_topics",
+                            "query_topics",
+                            "auto_categories",
+                            "named_entities",
+                            "user_entities",
+                            "themes",
+                            "mentions",
+                            "relations",
+                            "opinions",
+                            "sentiment_phrases",
+                            "pos_types",
+                            "summary_size",
+                            "detect_language",
+                            "collection_facets",
+                            "collection_attributes",
+                            "collection_mentions",
+                            "collection_concept_topics",
+                            "collection_query_topics",
+                            "collection_named_entities",
+                            "collection_user_entities",
+                            "collection_themes"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateConfigurations",
+            "description": "When creating a configuration, only a few fields are mandatory to set. These are:--name--is_primary--language.The complete list of settable values, their types and defaults, see more in readme.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "id",
+                    "type": "String",
+                    "info": "Enter the ID of the configuration you wish to clone.",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Configuration name.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "name"
+                    }
+                },
+                {
+                    "name": "isPrimary",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Identifies whether the current configuration is primary or not. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "is_primary"
+                    }
+                },
+                {
+                    "name": "autoResponse",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Defines whether or not the service should respond with processed results automatically. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "auto_response"
+                    }
+                },
+                {
+                    "name": "alphanumericThreshold",
+                    "type": "Number",
+                    "info": "Defines the threshold of alphanumeric characters needed in the text in percent. Default: 80.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "alphanumeric_threshold"
+                    }
+                },
+                {
+                    "name": "conceptTopicsThreshold",
+                    "type": "String",
+                    "info": "Defines concept topics detection threshold. Default: 0.45.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "concept_topics_threshold"
+                    }
+                },
+                {
+                    "name": "entitiesThreshold",
+                    "type": "Number",
+                    "info": "Defines low threshold for evidence score of named and user entities to be reported in the output. Default: 55.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "entities_threshold"
+                    }
+                },
+                {
+                    "name": "oneSentenceMode",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Defines whether or not service should use one sentence mode with less accurate grammar. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "one_sentence_mode"
+                    }
+                },
+                {
+                    "name": "processHtml",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Defines whether or not the service should clean up HTML tags before processing. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "process_html"
+                    }
+                },
+                {
+                    "name": "language",
+                    "type": "Sting",
+                    "info": "Defines target language that will be used for task processing. Default: English.",
+                    "required": false
+                },
+                {
+                    "name": "callback",
+                    "type": "Sting",
+                    "info": "Defines a callback URL for automatic data responding.",
+                    "required": false
+                },
+                {
+                    "name": "modelSentiment",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Switches on\/off model-based sentiment feature. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "model_sentiment"
+                    }
+                },
+                {
+                    "name": "intentions",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Switches on intentions detection feature. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "intentions"
+                    }
+                },
+                {
+                    "name": "conceptTopics",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether user categories will be reported for the document. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "concept_topics"
+                    }
+                },
+                {
+                    "name": "queryTopics",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether queries will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "query_topics"
+                    }
+                },
+                {
+                    "name": "autoCategories",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether auto-categories will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "auto_categories"
+                    }
+                },
+                {
+                    "name": "namedEntities",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether named entities will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "named_entities"
+                    }
+                },
+                {
+                    "name": "userEntities",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether user entities will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "user_entities"
+                    }
+                },
+                {
+                    "name": "themes",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether document and user\/named entity themes will be reported for the document. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "themes"
+                    }
+                },
+                {
+                    "name": "mentions",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether mentions for themes and user\/named entities will be reported for the document. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "mentions"
+                    }
+                },
+                {
+                    "name": "relations",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether user\/named entity relations will be reported for the document. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "relations"
+                    }
+                },
+                {
+                    "name": "opinions",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether user\/named entity opinions will be reported for the document. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "opinions"
+                    }
+                },
+                {
+                    "name": "sentimentPhrases",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether sentiment-bearing phrases will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "sentiment_phrases"
+                    }
+                },
+                {
+                    "name": "posTypes",
+                    "type": "String",
+                    "info": "ConfigurationDocumentSection.Defines parts-of-speech which will be responded by the server.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "pos_types"
+                    }
+                },
+                {
+                    "name": "summarySize",
+                    "type": "Number",
+                    "info": "ConfigurationDocumentSection.Limits the number of sentences for the document summary feature. Default: 3.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "summary_size"
+                    }
+                },
+                {
+                    "name": "detect_language",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Switches on language detection feature. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "detect_language"
+                    }
+                },
+                {
+                    "name": "collectionFacets",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationCollectionSection.Defines whether facets will be reported for the collection. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_facets"
+                    }
+                },
+                {
+                    "name": "collectionAttributes",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationCollectionSection.Defines whether facets will be reported for the collection. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_attributes"
+                    }
+                },
+                {
+                    "name": "collectionMentions",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationCollectionSection.Defines whether mentions for themes, user\/named entities, facets and attributes will be reported for the collection. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_mentions"
+                    }
+                },
+                {
+                    "name": "collectionConceptTopics",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationCollectionSection.Defines whether user_categories will be reported for the collection. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_concept_topics"
+                    }
+                },
+                {
+                    "name": "collectionQueryTopics",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether queries will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_query_topics"
+                    }
+                },
+                {
+                    "name": "collectionNamedEntities",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether named entities will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_named_entities"
+                    }
+                },
+                {
+                    "name": "collectionUserEntities",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether user entities will be reported for the document. Default: true.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_user_entities"
+                    }
+                },
+                {
+                    "name": "collectionThemes",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "ConfigurationDocumentSection.Defines whether document and user\/named entity themes will be reported for the document. Default: false.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "collection_themes"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/configurations.json",
+                "method": "put",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "id",
+                            "name",
+                            "is_primary",
+                            "auto_response",
+                            "alphanumeric_threshold",
+                            "concept_topics_threshold",
+                            "entities_threshold",
+                            "one_sentence_mode",
+                            "process_html",
+                            "language",
+                            "callback",
+                            "model_sentiment",
+                            "intentions",
+                            "concept_topics",
+                            "query_topics",
+                            "auto_categories",
+                            "named_entities",
+                            "user_entities",
+                            "themes",
+                            "mentions",
+                            "relations",
+                            "opinions",
+                            "sentiment_phrases",
+                            "pos_types",
+                            "summary_size",
+                            "detect_language",
+                            "collection_facets",
+                            "collection_attributes",
+                            "collection_mentions",
+                            "collection_concept_topics",
+                            "collection_query_topics",
+                            "collection_named_entities",
+                            "collection_user_entities",
+                            "collection_themes"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "cloneConfigurations",
+            "description": "This makes an exact copy of an existing configuration.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "template",
+                    "type": "String",
+                    "info": "Enter the ID of the configuration you wish to clone.",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Name of the new clone.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/configurations.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "name",
+                            "template"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteConfigurations",
+            "description": "Send a list of config IDs to be deleted.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "deleteIds",
+                    "type": "List",
+                    "structure": {
+                        "name": "deleteId",
+                        "type": "String",
+                        "info": "Single id which be deleted."
+                    },
+                    "info": "List of config IDs to be deleted.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/configurations.json",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "deleteIds"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getTemplatesList",
+            "description": "Get template list.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/templates.json",
+                "method": "get",
+                "requestParameters": []
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getListQueries",
+            "description": "Queries are tool to perform precise searches for exact strings or term combination within content. Theyare useful for finding product names, competitor names, specific features, and more. They can also beused for classifying very precise concepts rather than using broad categories.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration you wish to create queries in",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/queries.json",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createQueries",
+            "description": "Pass an object within the body of the request with a param.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration containing queries you wish to list.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "bodyQuery",
+                    "type": "Array",
+                    "info": "Boolean query used for content categorization.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "Query name.",
+                            "required": true
+                        },
+                        {
+                            "name": "query",
+                            "type": "String",
+                            "info": "Query string.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/queries.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "bodyQuery"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateQueries",
+            "description": "Pass a JSON-encoded object within the body of the request. A list of query, text key and value pairs. The text of the query submitted will replace an existing query.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration containing queries you wish to list.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "bodyQuery",
+                    "type": "Array",
+                    "info": "List of the queries to be update on the server.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "The query id.",
+                            "required": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "Query name.",
+                            "required": true
+                        },
+                        {
+                            "name": "query",
+                            "type": "String",
+                            "info": "Boolean query used for content categorization.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/queries.json",
+                "method": "put",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "bodyQuery"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteQueries",
+            "description": "The delete request allows users to remove queries from the server for a specific configuration.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration containing queries you wish to list.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "queryList",
+                    "type": "List",
+                    "required": true,
+                    "info": "List of query identifiers.",
+                    "structure": {
+                        "name": "queryId",
+                        "type": "String",
+                        "info": "The query id."
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/queries.json",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "queryList"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getCategoriesList",
+            "description": "Categories are broad tags that the Semantria service intelligently labels content with. Think of them asbuckets into which content is sorted into.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration containing categories you wish to list.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/categories.json",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createCategories",
+            "description": "The createCategories endpoint allows users to create categories on the server for a specific configuration. ",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration containing queries you wish to list.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "bodyCategories",
+                    "type": "Array",
+                    "info": "Parameters should be passed within JSON objectList of the categories to be added on the server.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "Category name.",
+                            "required": true
+                        },
+                        {
+                            "name": "weight",
+                            "type": "String",
+                            "info": "The \u201cweigh\u201d parameter is a tool that allows users to manually fine tune the impact of certain categories that don\u2019t properly reflect reality.",
+                            "required": true
+                        },
+                        {
+                            "name": "samples",
+                            "type": "JSON",
+                            "info": "Example [\"food\",\"restaurant\"]",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/categories.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "bodyCategories"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateCategories",
+            "description": "The updateCategories endpoint allows users to update categories on the server for a specific configuration. ",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration containing queries you wish to list.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "bodyCategories",
+                    "type": "Array",
+                    "info": "Parameters should be passed within JSON objectList of the categories to be update on the server.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "Category id.",
+                            "required": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "Category name.",
+                            "required": true
+                        },
+                        {
+                            "name": "weight",
+                            "type": "String",
+                            "info": "The \u201cweigh\u201d parameter is a tool that allows users to manually fine tune the impact of certain categories that don\u2019t properly reflect reality.",
+                            "required": true
+                        },
+                        {
+                            "name": "samples",
+                            "type": "JSON",
+                            "info": "Example [\"food\",\"restaurant\"]",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/categories.json",
+                "method": "put",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "bodyCategories"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteCategories",
+            "description": "This method removes certain user categories by their IDs on Semantria side.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration containing queries you wish to list.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "categoriesList",
+                    "type": "List",
+                    "info": "Parameters should be passed within JSON objectList of the categories to be deleted from the server.",
+                    "required": true,
+                    "structure": {
+                        "name": "categoryId",
+                        "type": "String",
+                        "info": "Category id.",
+                        "required": true
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/categories.json",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "categoriesList"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getListTaxonomy",
+            "description": "Lists the existing taxonomy structure for a given config.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration containing queries you wish to list.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/taxonomy.json",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createTaxonomy",
+            "description": "Crete a new taxonomy in a given config. Each config can have only one taxonomy defined.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of config to create the taxonomy in.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "bodyTaxonomy",
+                    "type": "Array",
+                    "info": "Parameters should be passed within JSON objectList of the taxonomy to be added on the server.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "Taxonomy name.",
+                            "required": true
+                        },
+                        {
+                            "name": "enforce_parent_matching",
+                            "type": "Select",
+                            "options":["true","false"],
+                            "info": "Enforces parent nodes to match on a content if the current node matches.",
+                            "required": false
+                        },
+                        {
+                            "name": "nodes",
+                            "type": "JSON",
+                            "info": "The list of sub-nodes associated with the current taxonomy node.",
+                            "required": false
+                        },
+                        {
+                            "name": "topics",
+                            "type": "JSON",
+                            "info": "The list of the topics associated with the current taxonomy node",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/taxonomy.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "bodyTaxonomy"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateTaxonomy",
+            "description": "To add nodes, or add topics to nodes, specify the relationship in the JSON you submit. You must refer to existing topics and nodes by their ID.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of config with taxonomy to update.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "bodyTaxonomy",
+                    "type": "Array",
+                    "info": "Parameters should be passed within JSON objectList of the taxonomy to be update on the server.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "Node id.",
+                            "required": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "Taxonomy name.",
+                            "required": true
+                        },
+                        {
+                            "name": "enforce_parent_matching",
+                            "type": "Select",
+                            "options":["true","false"],
+                            "info": "Enforces parent nodes to match on a content if the current node matches.",
+                            "required": false
+                        },
+                        {
+                            "name": "nodes",
+                            "type": "JSON",
+                            "info": "The list of sub-nodes associated with the current taxonomy node.",
+                            "required": false
+                        },
+                        {
+                            "name": "topics",
+                            "type": "JSON",
+                            "info": "The list of the topics associated with the current taxonomy node",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/taxonomy.json",
+                "method": "put",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "bodyTaxonomy"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteTaxonomy",
+            "description": "This method removes certain taxonomy nodes by their IDs on Semantria side.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration containing queries you wish to list.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "taxonomyIds",
+                    "type": "List",
+                    "info": "List of taxonomy node identifiers.",
+                    "required": true,
+                    "structure": {
+                        "name": "taxonomyId",
+                        "type": "String",
+                        "info": "Single taxonomy id.",
+                        "required": true
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/taxonomy.json",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "taxonomyId"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getListSentimentPhrases",
+            "description": "This method retrieves list of sentiment-bearing phrases available on Semantria side.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration containing queries you wish to list.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/phrases.json",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createSentimentPhrases",
+            "description": "This method adds sentiment-bearing phrases on Semantria side",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of config to create the taxonomy in.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "bodyPhrase",
+                    "type": "Array",
+                    "info": "List of parametrized objects.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "Category name.",
+                            "required": true
+                        },
+                        {
+                            "name": "weight",
+                            "type": "String",
+                            "info": "The `weigh` parameter is a tool that allows users to manually fine tune the impact of certain phrase that don\u2019t properly reflect reality.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/phrases.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "bodyPhrase"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateSentimentPhrases",
+            "description": "This method updates sentiment-bearing phrases by unique IDs on Semantria side.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of config to create the taxonomy in.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "bodyPhrase",
+                    "type": "Array",
+                    "info": "List of parametrized objects.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "Single phrase id.",
+                            "required": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "Category name.",
+                            "required": true
+                        },
+                        {
+                            "name": "weight",
+                            "type": "String",
+                            "info": "The `weigh` parameter is a tool that allows users to manually fine tune the impact of certain phrase that don\u2019t properly reflect reality.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/phrases.json",
+                "method": "put",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "bodyPhrase"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteSentimentPhrases",
+            "description": "This method removes certain sentiment-bearing phrases by their names on Semantria side.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration containing queries you wish to list.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "sentimentPhrasesIds",
+                    "type": "List",
+                    "info": "List of sentiment-bearing phrase identifiers.",
+                    "required": true,
+                    "structure": {
+                        "name": "sentimentPhraseId",
+                        "type": "String",
+                        "info": "Single sentiment Phrase Id.",
+                        "required": true
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/phrases.json",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "sentimentPhrasesId"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getListEntities",
+            "description": "This method retrieves list of user entities available on Semantria side.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration containing entities you wish to list.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/entities.json",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createEntities",
+            "description": "This method adds user entities on Semantria side.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration you wish to list entities for.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "bodyEntities",
+                    "type": "Array",
+                    "info": "List of parametrized objects.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "The entity name.",
+                            "required": true
+                        },
+                        {
+                            "name": "type",
+                            "type": "String",
+                            "info": "The entity type.",
+                            "required": true
+                        },
+                        {
+                            "name": "label",
+                            "type": "String",
+                            "info": "The entity label.",
+                            "required": true
+                        },
+                        {
+                            "name": "normalized",
+                            "type": "String",
+                            "info": "The entity normalized.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/entities.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "bodyEntities"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateEntities",
+            "description": "This method updates user entities by unique IDs on Semantria side.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration you wish to list entities for.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "bodyEntities",
+                    "type": "Array",
+                    "info": "List of parametrized objects.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "The entity id.",
+                            "required": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "The entity name.",
+                            "required": true
+                        },
+                        {
+                            "name": "type",
+                            "type": "String",
+                            "info": "The entity type.",
+                            "required": true
+                        },
+                        {
+                            "name": "label",
+                            "type": "String",
+                            "info": "The entity label.",
+                            "required": true
+                        },
+                        {
+                            "name": "normalized",
+                            "type": "String",
+                            "info": "The entity normalized.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/entities.json",
+                "method": "put",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "bodyEntities"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteEntities",
+            "description": "This method removes certain user entities by their names on Semantria side.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration containing entities you wish to list.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "entitiesIds",
+                    "type": "List",
+                    "info": "List of user entity identifiers.",
+                    "required": true,
+                    "structure": {
+                        "name": "entityId",
+                        "type": "String",
+                        "info": "Single entity Id.",
+                        "required": true
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/entities.json",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "entitiesId"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getBlacklist",
+            "description": "This method retrieves all backlisted items available on Semantria side.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration containing blacklist you wish to list.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/blacklist.json",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createBlacklist",
+            "description": "This method adds new unique items to the backlist on Semantria side.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration you wish to list entities for.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "bodyBlacklist",
+                    "type": "Array",
+                    "info": "List of parametrized objects.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "The blacklisted item name.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/blacklist.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "bodyBlacklist"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateBlacklist",
+            "description": "This method updates existing items by unique IDs in the backlist on Semantria side.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration you wish to list entities for.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "bodyBlacklist",
+                    "type": "Array",
+                    "info": "List of parametrized objects.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "Unique blacklist item identifier.",
+                            "required": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "The blacklisted item name.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/blacklist.json",
+                "method": "put",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "bodyBlacklist"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteBlacklistedItem",
+            "description": "This method removes certain blacklisted items by their values on Semantria side.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "Your API Secret.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_secret"
+                    }
+                },
+                {
+                    "name": "configId",
+                    "type": "String",
+                    "info": "ID of configuration containing queries you wish to list.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "config_id"
+                    }
+                },
+                {
+                    "name": "blacklistedItemIds",
+                    "type": "List",
+                    "info": "List of user entity identifiers.",
+                    "required": true,
+                    "structure": {
+                        "name": "blacklistedItemId",
+                        "type": "String",
+                        "info": "Single blacklisted item id.",
+                        "required": true
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.semantria.com\/blacklist.json",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "config_id"
+                        ]
+                    },
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "BlacklistedItemIds"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        }
+    ]
+}
