@@ -92,7 +92,7 @@ $app->post('/api/Lexalytics/updateConfigurations', function ($request, $response
     {
         if(!empty($requestParams['json']['collection_'.$value]))
         {
-            $requestParams['json']['collection'][$value] = $requestParams['json'][$value];
+            $requestParams['json']['collection'][$value] = $requestParams['json']['collection_'.$value];
             unset($requestParams['json']['collection_'.$value]);
         }
     }

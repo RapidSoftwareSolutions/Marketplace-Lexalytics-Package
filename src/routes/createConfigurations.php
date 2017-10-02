@@ -90,12 +90,14 @@ $app->post('/api/Lexalytics/createConfigurations', function ($request, $response
     {
         if(!empty($requestParams['json']['collection_'.$value]))
         {
-            $requestParams['json']['collection'][$value] = $requestParams['json'][$value];
+            $requestParams['json']['collection'][$value] = $requestParams['json']['collection_'.$value];
             unset($requestParams['json']['collection_'.$value]);
         }
     }
 
     $requestParams['json'] = array($requestParams['json']);
+
+
 
     try {
         $resp = $client->post($query_str, $requestParams);
