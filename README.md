@@ -220,7 +220,7 @@ When creating a configuration, only a few fields are mandatory to set. These are
 | summarySize            | Number     | ConfigurationDocumentSection.Limits the number of sentences for the document summary feature. Default: 3.
 | detect_language        | Select     | ConfigurationDocumentSection.Switches on language detection feature. Default: true.
 | collectionFacets       | Select     | ConfigurationCollectionSection.Defines whether facets will be reported for the collection. Default: true.
-| collectionAttributes   | Select     | ConfigurationCollectionSection.Defines whether facets will be reported for the collection. Default: true.
+| collectionAttributes   | Select     | ConfigurationCollectionSection.Defines whether attributes for facets will be reported for the collection. Default: true.
 | collectionMentions     | Select     | ConfigurationCollectionSection.Defines whether mentions for themes, user/named entities, facets and attributes will be reported for the collection. Default: false.
 | collectionConceptTopics| Select     | ConfigurationCollectionSection.Defines whether user_categories will be reported for the collection. Default: false.
 | collectionQueryTopics  | Select     | ConfigurationDocumentSection.Defines whether queries will be reported for the document. Default: true.
@@ -229,7 +229,7 @@ When creating a configuration, only a few fields are mandatory to set. These are
 | collectionThemes       | Select     | ConfigurationDocumentSection.Defines whether document and user/named entity themes will be reported for the document. Default: false.
 
 ## Lexalytics.updateConfigurations
-When creating a configuration, only a few fields are mandatory to set. These are:--name--is_primary--language.The complete list of settable values, their types and defaults, see more in readme.
+This method updates specific configurations by unique IDs on Semantria side.
 
 | Field                  | Type       | Description
 |------------------------|------------|----------
@@ -262,7 +262,7 @@ When creating a configuration, only a few fields are mandatory to set. These are
 | summarySize            | Number     | ConfigurationDocumentSection.Limits the number of sentences for the document summary feature. Default: 3.
 | detect_language        | Select     | ConfigurationDocumentSection.Switches on language detection feature. Default: true.
 | collectionFacets       | Select     | ConfigurationCollectionSection.Defines whether facets will be reported for the collection. Default: true.
-| collectionAttributes   | Select     | ConfigurationCollectionSection.Defines whether facets will be reported for the collection. Default: true.
+| collectionAttributes   | Select     | ConfigurationCollectionSection.Defines whether attributes for facets will be reported for the collection. Default: true.
 | collectionMentions     | Select     | ConfigurationCollectionSection.Defines whether mentions for themes, user/named entities, facets and attributes will be reported for the collection. Default: false.
 | collectionConceptTopics| Select     | ConfigurationCollectionSection.Defines whether user_categories will be reported for the collection. Default: false.
 | collectionQueryTopics  | Select     | ConfigurationDocumentSection.Defines whether queries will be reported for the document. Default: true.
