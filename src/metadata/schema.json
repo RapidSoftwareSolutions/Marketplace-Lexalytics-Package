@@ -114,7 +114,7 @@
                 {
                     "name": "tag",
                     "type": "String",
-                    "info": "Any text of up to 50 characters used like marker.\u201d",
+                    "info": "Any text of up to 50 characters used like marker.",
                     "required": true,
                     "vendorSchema": {
                         "name": "tag"
@@ -201,7 +201,7 @@
                         {
                             "name": "tag",
                             "type": "String",
-                            "info": "Any text of up to 50 characters used like marker.\u201d",
+                            "info": "Any text of up to 50 characters used like marker.",
                             "required": true,
                             "vendorSchema": {
                                 "name": "tag"
@@ -297,7 +297,7 @@
                         {
                             "name": "tag",
                             "type": "String",
-                            "info": "Any text of up to 50 characters used like marker.\u201d",
+                            "info": "Any text of up to 50 characters used like marker.",
                             "required": true,
                             "vendorSchema": {
                                 "name": "tag"
@@ -616,7 +616,7 @@
                 {
                     "name": "tag",
                     "type": "String",
-                    "info": "Any text of up to 50 characters used like marker",
+                    "info": "Any text of up to 50 characters used like marker.",
                     "required": true
                 },
                 {
@@ -1198,15 +1198,6 @@
                     }
                 },
                 {
-                    "name": "entitiesThreshold",
-                    "type": "Number",
-                    "info": "Defines low threshold for evidence score of named and user entities to be reported in the output. Default: 55.",
-                    "required": false,
-                    "vendorSchema": {
-                        "name": "entities_threshold"
-                    }
-                },
-                {
                     "name": "oneSentenceMode",
                     "type": "Select",
                     "options": [
@@ -1451,7 +1442,7 @@
                         "true",
                         "false"
                     ],
-                    "info": "ConfigurationCollectionSection.Defines whether facets will be reported for the collection. Default: true.",
+                    "info": "ConfigurationCollectionSection.Defines whether attributes for facets will be reported for the collection. Default: true.",
                     "required": false,
                     "vendorSchema": {
                         "name": "collection_attributes"
@@ -1926,7 +1917,7 @@
                         "true",
                         "false"
                     ],
-                    "info": "ConfigurationCollectionSection.Defines whether facets will be reported for the collection. Default: true.",
+                    "info": "ConfigurationCollectionSection.Defines whether attributes for facets will be reported for the collection. Default: true",
                     "required": false,
                     "vendorSchema": {
                         "name": "collection_attributes"
@@ -2410,7 +2401,7 @@
                         {
                             "name": "query",
                             "type": "String",
-                            "info": "Boolean query used for content categorization.",
+                            "info": "Query used for content categorization.",
                             "required": false
                         }
                     ]
@@ -2661,7 +2652,7 @@
         },
         {
             "name": "updateCategories",
-            "description": "The updateCategories endpoint allows users to update categories on the server for a specific configuration. ",
+            "description": "The updateCategories endpoint allows users to update categories on the server for a specific configuration.",
             "args": [
                 {
                     "name": "apiKey",
@@ -2693,7 +2684,7 @@
                 {
                     "name": "bodyCategories",
                     "type": "Array",
-                    "info": "Parameters should be passed within JSON objectList of the categories to be update on the server.",
+                    "info": "Parameters should be passed within JSON objectList of the categories to be update on the server.Required field - id.",
                     "required": true,
                     "structure": [
                         {
@@ -2914,7 +2905,7 @@
                 {
                     "name": "bodyTaxonomy",
                     "type": "Array",
-                    "info": "Parameters should be passed within JSON objectList of the taxonomy to be added on the server.",
+                    "info": "Parameters should be passed within JSON objectList of the taxonomy to be added on the server.Required field - name.",
                     "required": true,
                     "structure": [
                         {
@@ -3008,7 +2999,7 @@
                 {
                     "name": "bodyTaxonomy",
                     "type": "Array",
-                    "info": "Parameters should be passed within JSON objectList of the taxonomy to be update on the server.",
+                    "info": "Parameters should be passed within JSON objectList of the taxonomy to be update on the server.Required field - id,name.",
                     "required": true,
                     "structure": [
                         {
@@ -3625,7 +3616,7 @@
                 {
                     "name": "bodyEntities",
                     "type": "Array",
-                    "info": "List of parametrized objects.",
+                    "info": "List of parametrized objects.Required field - id.",
                     "required": true,
                     "structure": [
                         {

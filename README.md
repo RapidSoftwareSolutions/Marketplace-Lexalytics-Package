@@ -36,7 +36,7 @@ This method queues document onto the server for analysis. Queued document analyz
 | configId | String     | Identifier of the specific configuration that should be used for processing. 
 | id       | String     | Up to 32 symbols unique identifier of document assigned and tracked by client.
 | text     | String     | Document text that needs to be analyzed by the service.
-| tag      | String     | Any text of up to 50 characters used like marker.”
+| tag      | String     | Any text of up to 50 characters used like marker.
 
 ## Lexalytics.createMultipleDocuments
 A batch is an array of documents, each which consists of three values: an optional unique ID, an option tag, and the text you wish to analyze.
@@ -95,7 +95,7 @@ Deleting a queued document if Semantria has not processed it yet.
 | documentId| String     | the id of the deleted document.
 
 ## Lexalytics.retrieveDocumentsByJobId
-If you submitted via jobId, you must also retrieve by that jobId. You cannot use a config_id when retrieving by jobId, although you can use a config_id when submitting with a jobId.This call retrieves as many processed documents as fit into your maximum batch size.By default, the server responds to retrieval requests with 100 documents per batch. To increase this limit, please contact us.Once a document has been retrieved, it will be removed from the Semantria systems.
+If you submitted via jobId, you must also retrieve by that jobId. You cannot use a configId when retrieving by jobId, although you can use a configId when submitting with a jobId.This call retrieves as many processed documents as fit into your maximum batch size.By default, the server responds to retrieval requests with 100 documents per batch. To increase this limit, please contact us.Once a document has been retrieved, it will be removed from the Semantria systems.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -111,7 +111,7 @@ In addition to the required fields, you can also submit metadata about your cont
 | apiKey   | credentials| Your API Key.
 | apiSecret| credentials| Your API Secret.
 | id       | String     | Up to 32 symbols unique identifier of document assigned and tracked by client.
-| tag      | String     | Any text of up to 50 characters used like marker
+| tag      | String     | Any text of up to 50 characters used like marker.
 | text     | String     | Document text that needs to be analyzed by the service.
 | metadata | JSON       | The metadata field is schema less and can contain any valid JSON you wish to send. You can attach metadata to individual documents and to collections as well.Example - {"testKey":"testValue"}
 
@@ -147,7 +147,7 @@ This method retrieves analysis results for processed collections from Semantria.
 |-----------|------------|----------
 | apiKey    | credentials| Your API Key.
 | apiSecret | credentials| Your API Secret.
-| configId  | String     | Return processed documents from a particular config id. If the config_id is not provided, the API uses the primary configuration id by default.
+| configId  | String     | Return processed documents from a particular config id. If the configId is not provided, the API uses the primary configuration id by default.
 | documentId| String     | Return only the document with this ID.
 
 ## Lexalytics.retrieveProcessedDiscoveryByJobId
@@ -158,6 +158,7 @@ If you submitted by jobId you must also retrieve by jobId.
 | apiKey   | credentials| Your API Key.
 | apiSecret| credentials| Your API Secret.
 | jobId    | String     | Return processed documents from a particular job id.
+| configId  | String     | Return processed documents from a particular config id. If the configId is not provided, the API uses the primary configuration id by default.
 
 ## Lexalytics.requestSpecificDiscoveryAnalysis
 Requesting: Asking the status (or processed results) of a specific collection.
@@ -167,6 +168,8 @@ Requesting: Asking the status (or processed results) of a specific collection.
 | apiKey      | credentials| Your API Key.
 | apiSecret   | credentials| Your API Secret.
 | collectionId| String     | The collection id.
+| configId  | String     | Return processed documents from a particular config id. If the configId is not provided, the API uses the primary configuration id by default.
+
 
 ## Lexalytics.cancelDiscoveryAnalyses
 Deleting a queued document if Semantria has not processed it yet.
@@ -197,7 +200,6 @@ When creating a configuration, only a few fields are mandatory to set. These are
 | autoResponse           | Select     | Defines whether or not the service should respond with processed results automatically. Default: false.
 | alphanumericThreshold  | Number     | Defines the threshold of alphanumeric characters needed in the text in percent. Default: 80.
 | conceptTopicsThreshold | String     | Defines concept topics detection threshold. Default: 0.45.
-| entitiesThreshold      | Number     | Defines low threshold for evidence score of named and user entities to be reported in the output. Default: 55.
 | oneSentenceMode        | Select     | Defines whether or not service should use one sentence mode with less accurate grammar. Default: false.
 | processHtml            | Select     | Defines whether or not the service should clean up HTML tags before processing. Default: false.
 | language               | String      | Defines target language that will be used for task processing. Default: English.
@@ -369,7 +371,7 @@ The updateCategories endpoint allows users to update categories on the server fo
 | apiKey        | credentials| Your API Key.
 | apiSecret     | credentials| Your API Secret.
 | configId      | String     | ID of configuration containing queries you wish to list.
-| bodyCategories| Array      | Parameters should be passed within JSON objectList of the categories to be update on the server.
+| bodyCategories| Array      | Parameters should be passed within JSON objectList of the categories to be update on the server.Required field - id.
 | bodyCategories.id| String      | Unique category identifier.
 | bodyCategories.name | String      | Category name.
 | bodyCategories.weight | String      | Category weight.
@@ -402,7 +404,7 @@ Crete a new taxonomy in a given config. Each config can have only one taxonomy d
 | apiKey      | credentials| Your API Key.
 | apiSecret   | credentials| Your API Secret.
 | configId    | String     | ID of config to create the taxonomy in.
-| bodyTaxonomy| Array      | Parameters should be passed within JSON objectList of the taxonomy to be added on the server.
+| bodyTaxonomy| Array      | Parameters should be passed within JSON objectList of the taxonomy to be added on the server.Required field - name.
 | bodyTaxonomy.name | String      | Taxonomy name.
 | bodyTaxonomy.enforceParentMatching| Select     | Enforces parent nodes to match on a content if the current node matches
 | bodyTaxonomy.nodes| JSON      | The list of sub-nodes associated with the current taxonomy node.
@@ -436,7 +438,7 @@ To add nodes, or add topics to nodes, specify the relationship in the JSON you s
 | apiKey      | credentials| Your API Key.
 | apiSecret   | credentials| Your API Secret.
 | configId    | String     | ID of config with taxonomy to update.
-| bodyTaxonomy| Array      | Parameters should be passed within JSON objectList of the taxonomy to be update on the server.
+| bodyTaxonomy| Array      | Parameters should be passed within JSON objectList of the taxonomy to be update on the server.Required field - name,id.
 | bodyTaxonomy.id| String      | Taxonomy id.
 | bodyTaxonomy.name | String      | Taxonomy name.
 | bodyTaxonomy.enforceParentMatching| Select     | Enforces parent nodes to match on a content if the current node matches
@@ -538,7 +540,7 @@ This method updates user entities by unique IDs on Semantria side.
 | apiKey      | credentials| Your API Key.
 | apiSecret   | credentials| Your API Secret.
 | configId    | String     | ID of configuration you wish to list entities for.
-| bodyEntities| Array      | List of parametrized objects.
+| bodyEntities| Array      | List of parametrized objects.Required field - id.
 | bodyEntities.id| String      | Entities id.
 | bodyEntities.name| String      | Entity name.
 | bodyEntities.type| String      | Type of the entity (Company, Person, any custom type).

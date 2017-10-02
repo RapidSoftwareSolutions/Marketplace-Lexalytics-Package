@@ -55,7 +55,6 @@ $app->post('/api/Lexalytics/createConfigurations', function ($request, $response
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
 
-
     if(!empty($requestParams['query']) || isset($requestParams['query']))
     {
         $query_str = $query_str.'?';
@@ -67,6 +66,7 @@ $app->post('/api/Lexalytics/createConfigurations', function ($request, $response
 
         unset($requestParams['query']);
     }
+
 
 
     $nonce = uniqid('');
